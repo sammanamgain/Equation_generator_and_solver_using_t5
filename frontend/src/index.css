@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    /* background-image: url(Image/2.jpg) !important; */
+
+    background-size: cover;
+    background-repeat: space;
+    /* height: 200vh; */
+
+    height: fit-content;
+
+}

@@ -1,0 +1,109 @@
+.parent {
+    background-image: url(Image/well.jpg);
+
+    background-size: cover;
+
+    /* min-height: 320vh; */
+    /* height: max-content; */
+
+
+}
+
+.customcss {
+    /* background-image: url(Image/well.jpg); */
+
+    background-size: cover;
+
+    color: #ffffff
+}
+
+.customcssquestion {
+    color: black;
+    /* background-image: url(Image/2.jpg) !important; */
+
+    background-size: cover;
+
+
+
+}
+
+.text {
+    /* background-image: url(Image/well.jpg); */
+    /* background-repeat: no-repeat; */
+    background-size: cover;
+
+    color: #ffffff
+}
+
+.navbar-custom {
+    font-family: "Ubunut Mono", "Ubuntu", "Ubunutnu Condensed";
+    font-style: bold;
+    font-size: 24px;
+
+}
+
+.nav-subitems {
+    font-size: 14px;
+}
+
+.word-problem {
+    background-image: url(Image/well.jpg);
+
+
+    font-family: "Ubuntu", "Ubunut Mono", "Ubunutnu Condensed";
+    background-repeat: inherit;
+
+}
+
+.word-problem-h1 {
+    font-family: "Ubuntu", "Ubunut Mono", "Ubunutnu Condensed";
+
+
+}
+
+
+.before-extend {
+    /* background-image: url(Image/well.jpg) !important; */
+
+    background-size: cover;
+
+
+    /* height: 100vh; */
+}
+
+.Last-div {
+
+    background-image: url(Image/well.jpg);
+}
+
+extend {
+    /* background-image: url(Image/well.jpg) !important; */
+
+    background-size: cover;
+
+
+}
+
+@keyframes animateLeftToRight {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.extended {
+    animation: animateLeftToRight 0.5s ease forwards;
+}
+
+.Home {
+    background-image: url(Image/2.jpg);
+    background-size: cover;
+    width: 100vw;
+    color:white
+
+}
