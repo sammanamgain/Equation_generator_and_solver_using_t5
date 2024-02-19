@@ -23,6 +23,28 @@ function swapVariables(eqn) {
   } else {
     rightside = rightside;
   }
+  let isolated_bracket;
+
+  if (rightside.includes("(")) {
+    console.log("it contains ()");
+    let pos_of_leftbracket = rightside.indexOf("(");
+    let pos_of_rightbracket = rightside.indexOf(")");
+
+    //isolating the brackets only
+    isolated_bracket = rightside.slice(
+      pos_of_leftbracket,
+      pos_of_rightbracket + 1
+    );
+    console.log("Isolated bracket : ", isolated_bracket);
+    // let remaining_bracket =
+    //   rightside.slice(0, pos_of_leftbracket) +
+    //   rightside.slice(pos_of_rightbracket + 1, rightside.length);
+
+    //   console.log("Reamining after bracket: ", remaining_bracket);
+
+    rightside = rightside.replace(`${isolated_bracket}`, "Don't_touch");
+    console.log(rightside);
+  }
 
   console.log("printing the right side after standarizing", rightside);
 
@@ -31,14 +53,20 @@ function swapVariables(eqn) {
   let modified_rightside = "";
   while (pos < len) {
     if (rightside[pos] === "+") {
-      modified_rightside = modified_rightside + "-";
+      modified_rightside += "-";
     } else if (rightside[pos] === "-") {
-      modified_rightside = modified_rightside + "+";
+      modified_rightside += "+";
     } else {
-      modified_rightside = modified_rightside + rightside[pos];
+      modified_rightside += rightside[pos];
     }
     pos++;
   }
+
+  modified_rightside = modified_rightside.replace(
+    "Don't_touch",
+    `${isolated_bracket}`
+  );
+  modified_rightside = modified_rightside.replace(" ", "");
 
   console.log(
     "printing modified right side by changing the sign",
@@ -57,12 +85,19 @@ function changeposition(eqn) {
   let pos_of_x = eqn.indexOf("x");
   let pos_of_y = eqn.indexOf("y");
   if (pos_of_y < pos_of_x) {
-    let party = eqn.slice(0, pos_of_y + 1);
-    let partx = eqn.slice(pos_of_y + 1, index_equal);
-    let posequal = eqn.slice(index_equal);
-    let newstring = "";
-    newstring = partx + party + posequal;
-    return newstring;
+    let pos_of_closest_operator;
+    for (let i = pos_of_x; i > pos_of_y; i--) {
+      //    console.log(eqn[i]);
+      if (eqn[i] === "+" || eqn[i] === "+") {
+        pos_of_closest_operator = i;
+        break;
+      }
+    }
+    // console.log("position of the closed operator ", pos_of_closest_operator);
+    let component_of_x = eqn.slice(pos_of_closest_operator, index_equal);
+    // console.log("component of x is", component_of_x);
+    let component_of_y = eqn.slice(0, pos_of_closest_operator);
+    return component_of_x + component_of_y + eqn.slice(index_equal);
   }
   return eqn;
 }

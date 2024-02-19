@@ -6,16 +6,25 @@ import os
 from flask import Flask, request, jsonify
 from transformers import T5ForConditionalGeneration, T5Tokenizer
 app = Flask(__name__)
+CORS(app)
 # Load model directly
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("cpu")
 
 
-tokenizer = AutoTokenizer.from_pretrained("sammanamgain/T5_model")
-model = AutoModelForSeq2SeqLM.from_pretrained("sammanamgain/T5_model")
+tokenizer = AutoTokenizer.from_pretrained("google/flan-t5-large")
+model = AutoModelForSeq2SeqLM.from_pretrained(
+    "sammanamgain/FInal_Final_model_Math_large_model")
 model.to(device)
 
-CORS(app)
+
+def gen_output(text_output):
+    text_output = text_output.replace('equation:', '')
+    text_output = text_output.replace('<pad>', '')
+    text_output = text_output.replace('<unk>', '-')
+    text_output = text_output.replace('</s>', '')
+    text_output = text_output.replace('<s>', '')
+    return text_output
 
 
 @app.route('/math', methods=['POST'])
@@ -29,8 +38,10 @@ def math_solver():
         input_ids = tokenizer(
             f"English to Math Equation:{data['text']}", return_tensors="pt"
         ).input_ids.to(device)
-        outputs = model.generate(input_ids,max_length=30)
-        output = tokenizer.decode(outputs[0], skip_special_tokens=True)
+        outputs = model.generate(input_ids, max_length=30)
+        output = tokenizer.decode(outputs[0], skip_special_tokens=False)
+        output = gen_output(output)
+
         # equation="2x+3=5"
         print(output)
 
