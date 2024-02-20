@@ -1,6 +1,11 @@
 let answer = [];
+//importing the library
 import mathsteps from "mathsteps";
-function swapVariables(eqn) {
+
+
+
+//standarizing the equation to ax+by+c=0,this will not ensure  the x will always come first , swapping function does that which is placed below
+function makeStandarize(eqn) {
   let newstr = "";
 
   if (eqn[0] !== "+" && eqn[0] !== "-") {
@@ -12,6 +17,8 @@ function swapVariables(eqn) {
 
   let index_equal = newstr.indexOf("=");
 
+  //separating left side and right side using =
+
   let leftside = newstr.slice(0, index_equal + 1);
   let rightside = newstr.slice(index_equal + 1);
   console.log("printing left side", leftside);
@@ -20,9 +27,7 @@ function swapVariables(eqn) {
   //standarizing right side too
   if (rightside[0] !== "+" && rightside[0] !== "-") {
     rightside = "+" + rightside;
-  } else {
-    rightside = rightside;
-  }
+  } 
   let isolated_bracket;
 
   if (rightside.includes("(")) {
@@ -36,18 +41,14 @@ function swapVariables(eqn) {
       pos_of_rightbracket + 1
     );
     console.log("Isolated bracket : ", isolated_bracket);
-    // let remaining_bracket =
-    //   rightside.slice(0, pos_of_leftbracket) +
-    //   rightside.slice(pos_of_rightbracket + 1, rightside.length);
-
-    //   console.log("Reamining after bracket: ", remaining_bracket);
+ 
 
     rightside = rightside.replace(`${isolated_bracket}`, "Don't_touch");
     console.log(rightside);
   }
 
   console.log("printing the right side after standarizing", rightside);
-
+//changing the sign of right side
   let len = rightside.length;
   let pos = 0;
   let modified_rightside = "";
@@ -80,6 +81,10 @@ function swapVariables(eqn) {
   return finalstring;
 }
 
+
+
+//This will change the position of x and y , it will make x appear first ,and y appear second
+
 function changeposition(eqn) {
   let index_equal = eqn.indexOf("=");
   let pos_of_x = eqn.indexOf("x");
@@ -106,6 +111,7 @@ export const solve_equation = (equation) => {
   console.log("Given Equation: ", equation);
   answer.push(`Given Equation: ${equation}`);
   const AllEquation = equation;
+  //spliting the equation based on ,
   let firstEquation = AllEquation.split(",")[0];
   let secondEquation = AllEquation.split(",")[1];
 
@@ -130,8 +136,11 @@ export const solve_equation = (equation) => {
   console.log("printing before swappinhg");
   console.log("firstEquation", firstEquation);
   console.log("secondEquation", secondEquation);
-  firstEquation = swapVariables(firstEquation);
-  secondEquation = swapVariables(secondEquation);
+
+
+  //standarizing function
+  firstEquation = makeStandarize(firstEquation);
+  secondEquation = makeStandarize(secondEquation);
   firstEquation = changeposition(firstEquation);
   secondEquation = changeposition(secondEquation);
   console.log("printing after swappinhg");
@@ -178,16 +187,7 @@ export const solve_equation = (equation) => {
     //console.log("# of substeps: " + step.substeps.length); // e.g. # of substeps: 2
   });
 
-  // let check;
-  // const steps5 = mathsteps.solveEquation(result1);
-  // steps1.forEach((step) => {
-  //   //console.log("before change: " + step.oldEquation.ascii()); // e.g. before change: 2x + 3x = 35
-  //   //console.log("change: " + step.changeType); // e.g. change: SIMPLIFY_LEFT_SIDE
-  //   //console.log("after change: " + step.newEquation.ascii()); // e.g. after change: 5x = 35
-  //   check = step.newEquation.ascii();
-  //   //console.log("# of substeps: " + step.substeps.length); // e.g. # of substeps: 2
-  // });
-  // console.log("check:", check);
+ 
   answer.push(`First Equation:${result}`);
   answer.push(`Second Equation:${result1}`);
   console.log("first equation", result);
@@ -230,6 +230,7 @@ export const solve_equation = (equation) => {
   //console.log(y);
   answer.push("Substituting value of y in equation One");
   console.log("Substituting value of y in equation One");
+
   function detectCoefficient(equation) {
     equation = equation.replace(" ", "");
     // Remove all spaces from the equation

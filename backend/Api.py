@@ -10,11 +10,12 @@ CORS(app)
 # Load model directly
 
 device = torch.device("cpu")
+# Load model directly
 
-
-tokenizer = AutoTokenizer.from_pretrained("google/flan-t5-large")
+tokenizer = AutoTokenizer.from_pretrained(
+    "sammanamgain/advanced-T5-large-model")
 model = AutoModelForSeq2SeqLM.from_pretrained(
-    "sammanamgain/FInal_Final_model_Math_large_model")
+    "sammanamgain/advanced-T5-large-model")
 model.to(device)
 
 
