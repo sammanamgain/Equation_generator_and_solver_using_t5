@@ -33,11 +33,11 @@ export default function Word() {
         });
         const data = await res.json();
         setequationformat("Equation: " + data.data);
+        setloading(false);
         if (data.success === true) {
           equation_solver = solve_equation(data.data);
           setsolvesteps(equation_solver);
         }
-        setloading(false);
       };
       fetchDataAsync();
       setfetchData(false);
@@ -109,14 +109,15 @@ export default function Word() {
             <textarea
               className='border-2 rounded-none py-3   text-white text-center bg-slate-900'
               defaultValue={equationformat}
+              readOnly
             ></textarea>
 
             <h1>Solving the Equations...</h1>
           </div>
         )}
       </div>
-      <div className="Last-div w-[100vw] flex flex-col justify-center items-center gap-2">
-        {solvesteps.length>0 &&
+      <div className='Last-div w-[100vw] flex flex-col justify-center items-center gap-2'>
+        {solvesteps.length > 0 &&
           solvesteps.slice(0, currentIndex).map((step, index) => (
             <div
               key={index}
@@ -127,6 +128,7 @@ export default function Word() {
               <textarea
                 className='border-2 rounded-none py-3   text-white text-center bg-slate-900'
                 defaultValue={step}
+                readOnly
               ></textarea>
             </div>
           ))}

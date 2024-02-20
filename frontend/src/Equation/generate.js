@@ -2,8 +2,6 @@ let answer = [];
 //importing the library
 import mathsteps from "mathsteps";
 
-
-
 //standarizing the equation to ax+by+c=0,this will not ensure  the x will always come first , swapping function does that which is placed below
 function makeStandarize(eqn) {
   let newstr = "";
@@ -27,7 +25,7 @@ function makeStandarize(eqn) {
   //standarizing right side too
   if (rightside[0] !== "+" && rightside[0] !== "-") {
     rightside = "+" + rightside;
-  } 
+  }
   let isolated_bracket;
 
   if (rightside.includes("(")) {
@@ -41,14 +39,13 @@ function makeStandarize(eqn) {
       pos_of_rightbracket + 1
     );
     console.log("Isolated bracket : ", isolated_bracket);
- 
 
     rightside = rightside.replace(`${isolated_bracket}`, "Don't_touch");
     console.log(rightside);
   }
 
   console.log("printing the right side after standarizing", rightside);
-//changing the sign of right side
+  //changing the sign of right side
   let len = rightside.length;
   let pos = 0;
   let modified_rightside = "";
@@ -80,8 +77,6 @@ function makeStandarize(eqn) {
   console.log("printing final string", finalstring);
   return finalstring;
 }
-
-
 
 //This will change the position of x and y , it will make x appear first ,and y appear second
 
@@ -137,7 +132,6 @@ export const solve_equation = (equation) => {
   console.log("firstEquation", firstEquation);
   console.log("secondEquation", secondEquation);
 
-
   //standarizing function
   firstEquation = makeStandarize(firstEquation);
   secondEquation = makeStandarize(secondEquation);
@@ -187,20 +181,56 @@ export const solve_equation = (equation) => {
     //console.log("# of substeps: " + step.substeps.length); // e.g. # of substeps: 2
   });
 
- 
   answer.push(`First Equation:${result}`);
   answer.push(`Second Equation:${result1}`);
   console.log("first equation", result);
+  result = result.replace(" ", "");
   console.log("second equation", result1);
   let forx = result;
 
   let final;
   result = result.replace(/^x\s*=\s*/, "");
   result1 = result1.replace(/^x\s*=\s*/, "");
-  final = `${result}=${result1}`;
+
+  //function to check xandy are consecutive like xy
+  function check_xy() {
+    let pos_of_x = result1.indexOf("x");
+    let pos_of_y = result1.indexOf("y");
+    if (pos_of_y - pos_of_x === 1) {
+      return true;
+    }
+    return false;
+  }
+  // if (check_xy()) {
+  //   console.log("check x and y");
+  //   let pos_of_equal = result1.indexOf("=");
+
+  //   let afterequal = result1.slice(pos_of_equal + 1);
+  //   afterequal = afterequal.replace(" ", "");
+  //   if (afterequal[0] !== "+" || afterequal[0] !== "-") {
+  //     console.log(afterequal[0], "kei ne chaina");
+  //     afterequal = "+" + afterequal;
+  //   }
+
+  //   //changesign
+  //   if (afterequal[0] === "+") {
+  //     console.log("plus xa ta");
+  //     afterequal = "-" + afterequal.slice(1);
+  //     console.log(afterequal);
+  //   } else if (afterequal[0] === "-") {
+  //     afterequal = "+" + afterequal.slice(1);
+  //   }
+
+  //   console.log("afterequal check xy", afterequal);
+
+  //   final = `(${result})*${afterequal}=0`;
+  // } else {
+  //   final = `${result}=${result1}`;
+  // }
+
   // Constructing equation c
   //final = `${aMatches[0]}=${bMatches[0]}`;
-
+  final = `${result}=${result1}`;
   answer.push(`Final Expression:${final}`);
 
   console.log("final expression", final); // Output: "4(y)-3=2*y+2"

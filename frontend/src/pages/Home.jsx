@@ -23,7 +23,7 @@ export default function Home() {
           </h2>
           <a href='/text-question'>
             {" "}
-            <button className='border-2 border-solid border-red-600 bg-black p-3 rounded-lg'>
+            <button className='border-2 border-solid border-blue-300 bg-black p-3 rounded-lg '>
               Try Now
             </button>
           </a>

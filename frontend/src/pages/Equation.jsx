@@ -26,11 +26,10 @@ export default function Word() {
       const fetchDataAsync = async () => {
         setloading(true);
         const textvalue = { text: text };
-        
-        
-          equation_solver = solve_equation(textvalue['text']);
-          setsolvesteps(equation_solver);
-        
+
+        equation_solver = solve_equation(textvalue["text"]);
+        setsolvesteps(equation_solver);
+
         setloading(false);
       };
       fetchDataAsync();
@@ -92,15 +91,13 @@ export default function Word() {
             </h1>
             <h1 className=' text-xl font-bold '>How to solve your problem</h1>
             <div className='border-2 rounded-none p-3  '>
-              To solve your Equation upto Two variable using our solver,Type the problem in
-              the box .The solver will  show
-              step by step process to solve the equation
+              To solve your Equation upto Two variable using our solver,Type the
+              problem in the box .The solver will show step by step process to
+              solve the equation
             </div>
           </div>
         ) : (
-          <div className=' flex flex-col gap-4 mt-12 w-[80vw] lg:w-[70vw] before-extend '>
-           
-          </div>
+          <div className=' flex flex-col gap-4 mt-12 w-[80vw] lg:w-[70vw] before-extend '></div>
         )}
       </div>
       <div className='Last-div w-[100vw] flex flex-col justify-center items-center gap-2'>
@@ -115,6 +112,7 @@ export default function Word() {
               <textarea
                 className='border-2 rounded-none py-3   text-white text-center bg-slate-900'
                 defaultValue={step}
+                readOnly
               ></textarea>
             </div>
           ))}
